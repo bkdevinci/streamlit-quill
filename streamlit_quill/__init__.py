@@ -81,7 +81,7 @@ def st_quill(
                 {"size": ["small", False, "large", "huge"]},
             ],
             [
-                "formula", "blockquote", "code", "code-block", "clean"
+                "blockquote", "code", "code-block", "clean"
             ],
             [
                 "link", "image"
@@ -113,17 +113,86 @@ def st_quill(
 
 
 if not _RELEASE:
-    import streamlit as st
+  import streamlit as st
 
-    st.sidebar.title(":computer: Quill Editor")
-    placeholder = st.sidebar.text_input("Placeholder", "Some placeholder text")
-    html = st.sidebar.checkbox("Return HTML", False)
-    read_only = st.sidebar.checkbox("Read only", False)
+  st.sidebar.title(":computer: Quill Editor")
+  placeholder = st.sidebar.text_input("Placeholder", "Type some content...", placeholder="Type some content...")
+  test_html = ""
+  html = st.sidebar.checkbox("Return HTML", False)
+  read_only = st.sidebar.checkbox("Read only", False)
 
-    content = st_quill(
+  
+  if "edit_mode" not in st.session_state:
+      st.session_state.edit_mode = False
+  
+  if "test_html" not in st.session_state:
+      st.session_state.test_html = test_html
+
+  def handle_edit_click():
+      if st.session_state.edit_mode == bool(True):
+          st.session_state.edit_mode = False
+      else:
+          st.session_state.edit_mode = True
+  
+  def handle_save_click(data):
+      if st.session_state.edit_mode == bool(True):
+          st.session_state.edit_mode = False
+          st.session_state.test_html = data
+          
+
+  if st.session_state.edit_mode == bool(False):
+    edit_button = st.button("Edit" , key="edit_button", on_click=handle_edit_click)
+
+  if st.session_state.edit_mode == bool(True):
+      content = st_quill(
         placeholder=placeholder,
         html=html,
         readonly=read_only,
-    )
+        value=st.session_state.test_html,
+      )
+      save_button = st.button("Save" , key="save_button", on_click=handle_save_click, args=(content,))
+  else:
+      st.html(st.session_state.test_html)
 
-    st.write(content)
+else:
+    import streamlit as st
+
+    st.sidebar.title(":computer: Quill Editor")
+    placeholder = st.sidebar.text_input("Placeholder", "Type some content...", placeholder="Type some content...")
+    test_html = ""
+    html = st.sidebar.checkbox("Return HTML", False)
+    read_only = st.sidebar.checkbox("Read only", False)
+
+    
+    if "edit_mode" not in st.session_state:
+        st.session_state.edit_mode = False
+    
+    if "test_html" not in st.session_state:
+        st.session_state.test_html = test_html
+
+    def handle_edit_click():
+        if st.session_state.edit_mode == bool(True):
+            st.session_state.edit_mode = False
+        else:
+            st.session_state.edit_mode = True
+    
+    def handle_save_click(data):
+        if st.session_state.edit_mode == bool(True):
+            st.session_state.edit_mode = False
+            st.session_state.test_html = data
+            
+
+    if st.session_state.edit_mode == bool(False):
+      edit_button = st.button("Edit" , key="edit_button", on_click=handle_edit_click)
+
+    if st.session_state.edit_mode == bool(True):
+        content = st_quill(
+          placeholder=placeholder,
+          html=html,
+          readonly=read_only,
+          value=st.session_state.test_html,
+        )
+        save_button = st.button("Save" , key="save_button", on_click=handle_save_click, args=(content,))
+    else:
+        st.html(st.session_state.test_html)
+        st.write(st.session_state.test_html)
