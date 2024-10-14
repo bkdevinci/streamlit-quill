@@ -3,7 +3,7 @@ import setuptools
 
 
 setuptools.setup(
-    name="streamlit-quill",
+    name="streamlit-quill2",
     version="0.0.4",
     author="bkdevinci",
     author_email="",

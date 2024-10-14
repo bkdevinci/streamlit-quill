@@ -1,11 +1,11 @@
 # 📝 Streamlit Quill
 
-[![GitHub][github_badge]][github_link] [![PyPI][pypi_badge]][pypi_link] 
+[![GitHub][github_badge]][github_link] [![PyPI][pypi_badge]][pypi_link]
 
 ## Installation
 
 ```sh
-pip install streamlit-quill
+pip install streamlit-quill2
 ```
 
 ## Getting started
@@ -31,9 +31,7 @@ content
 [share_badge]: https://static.streamlit.io/badges/streamlit_badge_black_white.svg
 [share_link]: https://share.streamlit.io/okld/streamlit-gallery/main?p=quill-editor
 [share_img]: https://raw.githubusercontent.com/okld/streamlit-quill/main/preview.png
-
 [github_badge]: https://badgen.net/badge/icon/GitHub?icon=github&color=black&label
 [github_link]: https://github.com/okld/streamlit-quill
-
 [pypi_badge]: https://badgen.net/pypi/v/streamlit-quill?icon=pypi&color=black&label
 [pypi_link]: https://pypi.org/project/streamlit-quill
