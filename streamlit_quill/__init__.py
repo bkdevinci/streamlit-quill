@@ -115,6 +115,7 @@ def st_quill(
 if not _RELEASE:
   import streamlit as st
 
+  st.set_page_config(layout="wide", page_title="Streamlit-Quill")
   st.sidebar.title(":computer: Quill Editor")
   placeholder = st.sidebar.text_input("Placeholder", "Type some content...", placeholder="Type some content...")
   test_html = ""
@@ -157,6 +158,7 @@ if not _RELEASE:
 else:
     import streamlit as st
 
+    st.set_page_config(layout="wide", page_title="Streamlit-Quill")
     st.sidebar.title(":computer: Quill Editor")
     placeholder = st.sidebar.text_input("Placeholder", "Type some content...", placeholder="Type some content...")
     test_html = ""
